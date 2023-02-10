@@ -1,17 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <quote-form
+    v-if="!submitted"
+    @submit-form="submitForm" />
+    <quote-results 
+    v-else
+    @quote-again="quoteAgain"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import QuoteForm from './components/QuoteForm.vue'
+import QuoteResults from './components/QuoteResults.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    QuoteForm,
+    QuoteResults
+  },
+  data(){
+    return {
+      submitted: false
+    }
+  },
+  methods:{
+    submitForm(){
+      this.submitted = true
+    },
+    quoteAgain(){
+      this.submitted = false
+    }
   }
 }
 </script>
